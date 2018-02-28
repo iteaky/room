@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
+import java.net.URL;
 
 @Entity
 @Getter
@@ -18,7 +19,7 @@ public class Photo {
     @Id
     private Long id;
     @NotNull
-    private Image image;
+    private String imageURI;
 
     @ColumnDefault(value = "0")
     private Long like;

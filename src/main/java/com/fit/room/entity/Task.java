@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -26,5 +27,6 @@ public class Task {
     @OneToOne
     private Photo photoSecond;
 
+    @ElementCollection(targetClass=Integer.class)
     List<String> comments;
 }
