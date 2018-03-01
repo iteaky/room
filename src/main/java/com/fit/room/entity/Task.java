@@ -18,14 +18,9 @@ public class Task {
     @GeneratedValue
     private Long id;
 
-    @NotNull
-    @OneToOne
-    private Photo  photoFirst;
+    @ManyToMany
+    private List<Photo>  photos;
 
-    @NotNull
-    @OneToOne
-    private Photo photoSecond;
-
-    @ElementCollection(targetClass=Integer.class)
-    List<String> comments;
+    @OneToMany
+    private List<Comment> comments;
 }
