@@ -4,10 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -17,11 +15,12 @@ import java.util.List;
 @EqualsAndHashCode
 public class Task {
     @Id
+    @GeneratedValue
     private Long id;
 
     @NotNull
     @OneToOne
-    private Photo photoFirst;
+    private Photo  photoFirst;
 
     @NotNull
     @OneToOne

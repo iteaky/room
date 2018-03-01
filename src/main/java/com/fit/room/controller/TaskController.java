@@ -21,7 +21,7 @@ public class TaskController {
     public ResponseEntity<List<Task>> getAllTasks(){
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
     }
-    @PostMapping("/tasks")
+    @PostMapping("/loadTask")
     public ResponseEntity<Void> loadTask(Task task){
         taskService.addTask(task);
         return new ResponseEntity<>(HttpStatus.OK);
