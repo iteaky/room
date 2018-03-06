@@ -5,9 +5,7 @@ import com.fit.room.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +15,14 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/tasks")
-    public ResponseEntity<List<Task>> getAllTasks(){
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json" )
+    public ResponseEntity<List<Task>> getAllTasks() {
+
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
     }
-    @PostMapping("/loadTask")
-    public ResponseEntity<Void> loadTask(Task task){
+
+    @RequestMapping(value = "/loadTask", method = RequestMethod.POST, consumes = "application/json", produces = "application/json" )
+    public ResponseEntity<Void> loadTask( @RequestBody Task task) {
         taskService.addTask(task);
         return new ResponseEntity<>(HttpStatus.OK);
     }

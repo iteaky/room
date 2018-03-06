@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -18,9 +19,10 @@ public class Task {
     @GeneratedValue
     private Long id;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Photo>  photos;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Comment> comments;
+
 }
