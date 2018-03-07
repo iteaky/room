@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -35,6 +36,10 @@ public class TaskService {
         return taskDAO.findAll();
     }
 
+    public Task getTask(Long id){
+        return taskDAO.getOne(id);
+    }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void createTestTask() {
         Task task = new Task();
@@ -46,6 +51,7 @@ public class TaskService {
         comment.setCreationDate(LocalDateTime.now());
         comment.setText("best!");
         task.setComments(Collections.singletonList(comment));
+        task.setSub("which one?");
         photoDAO.save(photo);
         commentDAO.save(comment);
         taskDAO.save(task);

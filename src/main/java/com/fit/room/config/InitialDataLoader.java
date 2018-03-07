@@ -20,23 +20,12 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     @Autowired
     TaskService taskService;
-//
-//    @Autowired
-//    UserDAO userDAO;
+
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
         taskService.createTestTask();
-
-
-//
-//        User user = new User();
-//        user.setActive(1);
-//        user.setEmail("admin@mail.com");
-//        user.setName("admin");
-//        user.setPassword("123456");
-//        userDAO.save(user);
 
 
     }

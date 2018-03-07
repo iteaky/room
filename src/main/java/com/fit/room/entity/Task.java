@@ -3,6 +3,7 @@ package com.fit.room.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
@@ -21,6 +22,9 @@ public class Task {
 
     @ManyToMany(cascade = {CascadeType.ALL})
     private List<Photo>  photos;
+
+    @Length(max = 100)
+    private String sub;
 
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Comment> comments;
