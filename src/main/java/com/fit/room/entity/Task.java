@@ -21,7 +21,7 @@ public class Task {
     private Long id;
 
     @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Photo>  photos;
+    private List<Photo> photos;
 
     @Length(max = 100)
     private String sub;

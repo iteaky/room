@@ -15,22 +15,21 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json" )
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Task>> getAllTasks() {
 
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
     }
 
 
-    @RequestMapping(value = "/tasks/{taskId}", method = RequestMethod.GET, produces = "application/json" )
+    @RequestMapping(value = "/tasks/{taskId}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Task> getTask(@PathVariable("taskId") Long taskId) {
 
         return new ResponseEntity<>(taskService.getTask(taskId), HttpStatus.OK);
     }
 
 
-
-    @RequestMapping(value = "/loadTask", method = RequestMethod.POST, consumes = "application/json", produces = "application/json" )
+    @RequestMapping(value = "/loadTask", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<Void> loadTask(@RequestBody Task task) {
         taskService.addTask(task);
         return new ResponseEntity<>(HttpStatus.OK);

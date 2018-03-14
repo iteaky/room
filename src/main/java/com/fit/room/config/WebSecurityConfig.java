@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -16,12 +17,18 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static String REALM="MY_TEST_REALM";
+    private static String REALM = "MY_TEST_REALM";
+
+    @Autowired
+    private
+    UserDetailService userDetailService;
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("tom").password("abc123").roles("USER");
+        auth.inMemoryAuthentication().withUser("artem").password("artem").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("kostya").password("kostya").roles("ADMIN");
+        auth.authenticationProvider(authenticationProvider());
+
     }
 
     @Override
@@ -35,16 +42,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BasicAuthenticationPoint getBasicAuthEntryPoint(){
+    public BasicAuthenticationPoint getBasicAuthEntryPoint() {
         return new BasicAuthenticationPoint();
     }
 
-
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider
+                = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
 
     @SuppressWarnings("deprecation")
     @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
+    private static NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
@@ -55,35 +69,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 }
 
-
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.core.userdetails.User;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//
-//    @Autowired
-//    private
-//    BasicAuthenticationPoint basicAuthenticationPoint;
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//        http.authorizeRequests().antMatchers( "/login").permitAll()
-//                .anyRequest().authenticated();
-//        http.httpBasic().authenticationEntryPoint(basicAuthenticationPoint);
-//    }
-//
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("user").password("{noop}password").roles("USER");
-//    }
-//}

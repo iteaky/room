@@ -29,7 +29,7 @@ public class UserController {
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
         List<User> users = userService.findAllUsers();
-        if(users.isEmpty()){
+        if (users.isEmpty()) {
             return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
@@ -38,7 +38,7 @@ public class UserController {
 
     //-------------------Retrieve Single User--------------------------------------------------------
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<User> getUser(@PathVariable("id") long id) {
         System.out.println("Fetching User with id " + id);
         User user = userService.findById(id);
@@ -48,7 +48,6 @@ public class UserController {
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
-
 
 
     //-------------------Create a User--------------------------------------------------------

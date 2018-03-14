@@ -36,7 +36,7 @@ public class TaskService {
         return taskDAO.findAll();
     }
 
-    public Task getTask(Long id){
+    public Task getTask(Long id) {
         return taskDAO.getOne(id);
     }
 

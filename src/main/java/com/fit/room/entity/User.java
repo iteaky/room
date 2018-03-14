@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -28,6 +29,9 @@ public class User {
     @Length(min = 5)
     @NotEmpty
     private String password;
+
+    @NotEmpty
+    private String role;
 
     private int active;
 
