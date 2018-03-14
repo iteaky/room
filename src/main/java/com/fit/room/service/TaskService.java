@@ -45,7 +45,7 @@ public class TaskService {
         Task task = new Task();
         Photo photo = new Photo();
         Comment comment = new Comment();
-        photo.setImageURI("http://imagehost/ig/1221.jpg");
+        photo.setImageURI("/photos/1.jpg");
         photo.setLikeCount(999L);
         task.setPhotos(Collections.singletonList(photo));
         comment.setCreationDate(LocalDateTime.now());
@@ -59,4 +59,7 @@ public class TaskService {
     }
 
 
+    public void deleteAllTask() {
+        taskDAO.deleteAll();
+    }
 }

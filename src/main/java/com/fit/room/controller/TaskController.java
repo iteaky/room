@@ -15,24 +15,31 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/task", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Task>> getAllTasks() {
 
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
     }
 
 
-    @RequestMapping(value = "/tasks/{taskId}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/task/{taskId}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Task> getTask(@PathVariable("taskId") Long taskId) {
 
         return new ResponseEntity<>(taskService.getTask(taskId), HttpStatus.OK);
     }
 
 
-    @RequestMapping(value = "/loadTask", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/task", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<Void> loadTask(@RequestBody Task task) {
         taskService.addTask(task);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/task", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<Void> deleteAllTasks() {
+        taskService.deleteAllTask();
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
 
 }

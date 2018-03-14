@@ -25,7 +25,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        // taskService.createTestTask();
+         taskService.createTestTask();
 
 
     }
