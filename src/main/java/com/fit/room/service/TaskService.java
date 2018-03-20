@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 @Transactional
@@ -46,7 +48,7 @@ public class TaskService {
         Photo photo = new Photo();
         Comment comment = new Comment();
         photo.setImageURI("/photos/1.jpg");
-        photo.setLikeCount(999L);
+        photo.setLikeCount(new AtomicLong(100));
         task.setPhotos(Collections.singletonList(photo));
         comment.setCreationDate(LocalDateTime.now());
         comment.setText("best!");
@@ -61,5 +63,10 @@ public class TaskService {
 
     public void deleteAllTask() {
         taskDAO.deleteAll();
+    }
+
+
+    public void addComment(Comment comment, Long taskId) {
+        taskDAO.findById(taskId).ifPresent(task -> task.getComments().add(comment));
     }
 }

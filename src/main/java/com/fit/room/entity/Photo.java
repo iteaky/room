@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
 
 
 @Entity
@@ -26,8 +27,7 @@ public class Photo {
     @NotNull
     private String imageURI;
 
-    @ColumnDefault("0")
-    private Long likeCount;
-
+//    @Column(columnDefinition = "BIGINT")
+    private AtomicLong likeCount;
 
 }

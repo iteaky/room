@@ -36,7 +36,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo getApiInfo() {
-        return new ApiInfo("Cucumber test generator REST API",
+        return new ApiInfo("Fit room REST API",
                 "REST Api Documentation",
                 "1.0",
                 "urn:tos",

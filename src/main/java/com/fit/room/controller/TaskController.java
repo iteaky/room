@@ -1,5 +1,6 @@
 package com.fit.room.controller;
 
+import com.fit.room.entity.Comment;
 import com.fit.room.entity.Task;
 import com.fit.room.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,13 @@ public class TaskController {
     @RequestMapping(value = "/task", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Void> deleteAllTasks() {
         taskService.deleteAllTask();
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/task/{taskId}/comment", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Void> addComentToTask(@PathVariable("taskId") Long taskId,
+                                               @RequestBody Comment comment) {
+        taskService.addComment(comment, taskId);
         return new ResponseEntity<>( HttpStatus.OK);
     }
 

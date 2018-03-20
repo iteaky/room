@@ -1,9 +1,6 @@
 package com.fit.room.controller;
 
-import com.fit.room.entity.Photo;
-import com.fit.room.entity.Task;
 import com.fit.room.service.ImageService;
-import com.fit.room.service.TaskService;
 import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 @RestController
